@@ -21,8 +21,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   console.log("Post arrived")
   const { title, content } = req.body;
-  console.log(title)
-  //const post = await createPost({ title, content });
+  console.log(req.body)
+  const post = await createPost({ title, content });
   res.json(post);
 });
 

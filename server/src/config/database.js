@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize("Bloggy", "hicoders", "hicoders_12", {
-  host: "mysql-hicoders", 
+const sequelize = new Sequelize("Bloggy", "root", "546trygfh", { // Replace with hicoders "hicoders" and "hicoders_12"
+  host: "localhost",  //Replace with "mysql-hicoders"
   port: 3306,
   dialect: "mysql",
   logging: false

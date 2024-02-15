@@ -24,48 +24,53 @@ function createPage() {
         </nav>
         <h3 class="create-header">Create new Post</h3>
         <form id="create-post-form">
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"></label>
-            <textarea class="form-control" id="title-label" rows="1" placeholder="title"></textarea>
-        </div>
-    
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"></label>
-            <textarea class="form-control" id="content-label" rows="5" placeholder="content"></textarea>
-        </div>
-    
-        <div class="col-12">
-            <button class="btn btn-primary" type="submit" id="submit-button">Submit form</button>
-            </div>
+          <div class="mb-3">
+              <label for="table" class="form-label"></label>
+              <textarea class="form-control" id="title" rows="1" placeholder="title"></textarea>
+          </div>
+      
+          <div class="mb-3">
+              <label for="content" class="form-label"></label>
+              <textarea class="form-control" id="content" rows="5" placeholder="content"></textarea>
+          </div>
+      
+          <div class="col-12">
+              <button class="btn btn-primary" type="submit" id="submit-button">Submit form</button>
+              </div>
         </form>
   `;
   
 
-  const createPostForm = document.getElementById("#create-post-form");
+  const createPostForm = document.getElementById("create-post-form");
   createPostForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const title = document.getElementById("#title").value;
-    const content = document.getElementById("#content").value;
-    console.log(content)
+    const titleElement = document.getElementById("title");
+    const contentElement = document.getElementById("content");
+    console.log(contentElement)
+    console.log(titleElement)
 
-    try {
-      const response = await fetch('http://localhost:3000/api/v1/posts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title, content }),
-      });
-      console.log(JSON.stringify({ title, content }))
+    if (!!titleElement && !!contentElement) {
+      const title = titleElement.value;
+      const content = contentElement.value;
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title, content }),
+        });
+        console.log(JSON.stringify({ title, content }))
 
-      if (response.ok) {
-        console.log("Post created successfully!");
-        } else {
-        console.error("Error creating post:", response.statusText);        
+        if (response.ok) {
+          console.log("Post created successfully!");
+          } else {
+          console.error("Error creating post:", response.statusText);        
+        }
+      } catch (error) {
+        console.error("Error creating post:", error);         }
       }
-    } catch (error) {
-      console.error("Error creating post:", error);         }
   });
 }
 
